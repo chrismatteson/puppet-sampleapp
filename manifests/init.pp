@@ -28,7 +28,7 @@ class sampleapp (
 
   firewall { '100 allow HTTP':
     port   => 80,
-    porto  => 'tcp',
+    proto  => 'tcp',
     action => 'accept',
   }
 }
