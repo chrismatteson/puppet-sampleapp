@@ -27,6 +27,11 @@ class sampleapp (
     revision => $deployref,
   }
 
+  file { '/var/lib/tomcat/webapps/ROOT':
+    ensure  => 'directory',
+    require => Tomcat::Instance['default'],
+  }
+
   firewall { '100 allow tomcat':
     port   => 8080,
     proto  => 'tcp',
