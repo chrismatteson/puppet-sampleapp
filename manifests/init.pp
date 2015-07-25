@@ -1,8 +1,10 @@
 class sampleapp (
-  $deployref 
+  $deployref = 'master',
+  $ensure = 'latest',
 ) {
 
   include apache
+  include java
   class { 'tomcat':
     install_from_source => false,
   }
@@ -15,19 +17,18 @@ class sampleapp (
     use_init     => true,
     service_name => 'tomcat',
   }->
-  vcsrepo { '/tmp/Sample-App':
-    ensure   => 'present',
+  package { 'git':
+    ensure => 'present',
+  }->
+  vcsrepo { '/var/lib/tomcat/webapps/':
+    ensure   => $ensure,
     provider => 'git',
     source   => 'git://github.com/chrismatteson/Sample-App.git',
     revision => $deployref,
-  }->
-  tomcat::war { 'sample.war':
-    catalina_base => '/opt/apache-tomcat/tomcat',
-    war_source => '/tmp/Sample-App/sample.war',
   }
 
-  firewall { '100 allow HTTP':
-    port   => 80,
+  firewall { '100 allow tomcat':
+    port   => 8080,
     proto  => 'tcp',
     action => 'accept',
   }
