@@ -1,7 +1,6 @@
 require 'beaker-rspec/spec_helper'
 require 'beaker-rspec/helpers/serverspec'
 require 'beaker/puppet_install_helper'
-require 'pry'
 
 run_puppet_install_helper
 
@@ -21,6 +20,7 @@ RSpec.configure do |c|
       on host, puppet('module','install','nanliu-staging'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module','install','puppetlabs-vcsrepo'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module','install','puppetlabs-concat'), { :acceptable_exit_codes => [0,1] }
+      on host, puppet('module','install','puppetlabs-java'), { :acceptable_exit_codes => [0,1] }
     end
   end
 end
