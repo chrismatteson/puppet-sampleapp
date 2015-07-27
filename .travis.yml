@@ -1,7 +1,8 @@
 install:
   - sudo sh -c "wget -qO- https://get.docker.io/gpg | apt-key add -"
-  - sudo add-apt-repository ppa:docker/ppa -y
-  - sudo sh -c "echo deb http://get.docker.io/ubuntu docker main | sudo tee -a /etc/apt/sources.list"
+  - sudo sh -c "curl https://get.docker.com/ | sudo bash"
+#  - sudo add-apt-repository ppa:docker/ppa -y
+#  - sudo sh -c "echo deb http://get.docker.io/ubuntu docker main | sudo tee -a /etc/apt/sources.list"
 #  - sudo apt-get update
   - sudo mkdir -p /var/lib/docker
   - echo exit 101 | sudo tee /usr/sbin/policy-rc.d
