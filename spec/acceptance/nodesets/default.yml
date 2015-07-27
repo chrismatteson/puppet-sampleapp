@@ -1,5 +1,6 @@
 HOSTS:
   localhost:
+    platform: ubuntu-14.04-amd64 
     hypervisor: none
 CONFIG:
   type: foss
