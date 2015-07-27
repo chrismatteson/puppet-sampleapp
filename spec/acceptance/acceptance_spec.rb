@@ -13,8 +13,8 @@ describe 'Acceptance test' do
     end
 
     describe 'should not return an error on curl' do
-      it 'should delete accounts' do
-        shell("curl localhost:8080/sample -f", :acceptable_exit_codes => 1)
+      it 'should not return an error on curl' do
+        shell("curl localhost:8080/sample -f", :acceptable_exit_codes => 0)
       end
     end
   end
