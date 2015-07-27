@@ -1,10 +1,9 @@
 HOSTS:
-  centos-65-x64:
+  centos6-64:
     roles:
-      - master
+     - agent
     platform: el-6-x86_64
-    box : puppetlabs/centos-6.6-64-nocm
-    box_url : http://vagrantcloud.com/puppetlabs/centos-6.6-64-nocm
-    hypervisor : vagrant
+    image: centos:6.6
+    hypervisor: docker
 CONFIG:
   type: foss
