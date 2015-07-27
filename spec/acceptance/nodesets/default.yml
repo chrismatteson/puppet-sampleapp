@@ -2,5 +2,10 @@ HOSTS:
   localhost:
     platform: ubuntu-14.04-amd64 
     hypervisor: none
+  ssh:
+    password: travis
+    user: root
+    auth_methods:
+     - password
 CONFIG:
   type: foss
