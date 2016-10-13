@@ -5,10 +5,10 @@ class sampleapp (
 
   include apache
   include java
+  include git
   class { 'tomcat':
     install_from_source => false,
-  }
-  class { 'epel': }->
+  }->
   tomcat::instance{ 'default':
     package_name => 'tomcat',
   }->
@@ -17,18 +17,16 @@ class sampleapp (
     use_init     => true,
     service_name => 'tomcat',
   }->
-  package { 'git':
-    ensure => 'present',
-  }->
   vcsrepo { '/var/lib/tomcat/webapps/':
     ensure   => $ensure,
     provider => 'git',
     source   => 'git://github.com/chrismatteson/Sample-App.git',
     revision => $deployref,
+    require  => Package['git'],
   }
 
   firewall { '100 allow tomcat':
-    port   => 8080,
+    dport   => 8080,
     proto  => 'tcp',
     action => 'accept',
   }
