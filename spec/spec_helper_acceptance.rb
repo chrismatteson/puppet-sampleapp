@@ -23,6 +23,7 @@ RSpec.configure do |c|
       on host, puppet('module','install','puppetlabs-java'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module','install','stahnma-epel'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module','install','puppetlabs-firewall'), { :acceptable_exit_codes => [0,1] }
+      on host, puppet('module','install','puppetlabs-git'), { :acceptable_exit_codes => [0,1] }
     end
   end
 end
