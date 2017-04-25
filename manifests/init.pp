@@ -5,17 +5,11 @@ class sampleapp (
 
   include apache
   include java
-  class { 'tomcat':
-    install_from_source => false,
-  }
-  class { 'epel': }->
+  tomcat::install { '/opt/tomcat':
+    source_url => 'https://www-us.apache.org/dist/tomcat/tomcat-7/v7.0.x/bin/apache-tomcat-7.0.x.tar.gz',
+  } ->
   tomcat::instance{ 'default':
-    package_name => 'tomcat',
-  }->
-  tomcat::service { 'default':
-    use_jsvc     => false,
-    use_init     => true,
-    service_name => 'tomcat',
+    catalina_home => '/opt/tomcat',
   }->
   package { 'git':
     ensure => 'present',
