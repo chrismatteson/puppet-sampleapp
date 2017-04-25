@@ -5,24 +5,22 @@ class sampleapp (
 
   include apache
   include java
+  include git
   tomcat::install { '/opt/tomcat':
     source_url => 'https://www-us.apache.org/dist/tomcat/tomcat-7/v7.0.x/bin/apache-tomcat-7.0.x.tar.gz',
   } ->
   tomcat::instance{ 'default':
     catalina_home => '/opt/tomcat',
   }->
-  package { 'git':
-    ensure => 'present',
-  }->
   vcsrepo { '/var/lib/tomcat/webapps/':
     ensure   => $ensure,
     provider => 'git',
     source   => 'git://github.com/chrismatteson/Sample-App.git',
     revision => $deployref,
+    require  => Package['git'],
   }
-
   firewall { '100 allow tomcat':
-    port   => 8080,
+    dport   => 8080,
     proto  => 'tcp',
     action => 'accept',
   }
