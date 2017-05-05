@@ -9,5 +9,5 @@ node {
 
   stage 'Deploy'
   puppet.credentials 'pe-token'
-  puppet.job 'production', query: 'nodes { resources { type = "Tomcat::War" and title = "sample.war" }}'
+  puppet.job 'production', query: 'nodes { resources { type = "File" and title = "/opt/tomcat/webapps/sample.war" }}'
 }

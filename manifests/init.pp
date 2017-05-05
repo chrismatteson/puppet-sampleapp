@@ -11,9 +11,10 @@ class sampleapp (
   tomcat::instance{ 'default':
     catalina_home => '/opt/tomcat',
   }
-  tomcat::war { 'sample.war':
-    catalina_base => '/opt/tomcat',
-    war_source    => "http://${artifactserver}/sample-${version}.war",
+  file { '/opt/tomcat/webapps/sample.war':
+    ensure => file,
+    mode   => '0644',
+    source => "http://${artifactserver}/sample-${version}.war",
   }
   firewall { '100 allow tomcat':
     dport   => 8080,
