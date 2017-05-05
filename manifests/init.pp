@@ -1,6 +1,6 @@
 class sampleapp (
-  $artifactserver = hiera('artifact-server'),
-  $version = hiera('sampleapp-version'),
+  $artifactserver,
+  $version,
 ) {
 
   include apache
@@ -10,7 +10,7 @@ class sampleapp (
   } ->
   tomcat::instance{ 'default':
     catalina_home => '/opt/tomcat',
-  }
+  } ->
   file { '/opt/tomcat/webapps/sample.war':
     ensure => file,
     mode   => '0644',
