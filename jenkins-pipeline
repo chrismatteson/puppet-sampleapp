@@ -1,0 +1,13 @@
+node {
+  sh 'rm -rf *'
+  stage 'Checkout Repo and build jar for packaging'
+  git 'http://github.com/chrismatteson/sample-app.git'
+  sh "jar -cvf /opt/sampleapp/sample-${version}.war *"
+
+  stage 'Release New Build'
+  puppet.hiera scope: 'production', key: 'sampleapp-version', value: "${version}"
+
+  stage 'Deploy'
+  puppet.credentials 'pe-token'
+  puppet.job 'production', query: 'nodes { resources { type = "Tomcat::War" and title = "sample.war" }}'
+}

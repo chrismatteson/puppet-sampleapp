@@ -9,8 +9,8 @@ class sampleapp::infrastructure (
 
   docker::run { 'gitlab':
     image            => 'gitlab/gitlab-ce:latest',
-    env              => "GITLAB_OMNIBUS_CONFIG='external_url 'http://$fqdn/''",
-    ports            => ['22:10022', '80:10080', '443:100443'],
-#    extra_parameters => [ '--restart=always' ],
+#    env              => "GITLAB_OMNIBUS_CONFIG='external_url http://10.20.1.29/'",
+    ports            => 80,
+#    extra_parameters => '--restart=unless-stopped',
   }
 }
